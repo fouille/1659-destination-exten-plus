@@ -1,0 +1,22 @@
+diff --git a/wazo_confd/helpers/destination.py b/wazo_confd/helpers/destination.py
+index 6ec90fde..96ef2f3b 100644
+--- a/wazo_confd/helpers/destination.py
++++ b/wazo_confd/helpers/destination.py
+@@ -35,7 +35,7 @@ from wazo_confd.helpers.validator import GetResource, ResourceExists, Validator
+ 
+ COMMAND_REGEX = r'^(?!(try)?system\()[a-zA-Z]{3,}\((.*)\)$'
+ CONTEXT_REGEX = r'^[a-zA-Z0-9_-]{1,39}$'
+-EXTEN_REGEX = r'^[0-9*#]{1,255}$'
++EXTEN_REGEX = r'^[0-9*#+]{1,255}$'
+ SKILL_RULE_VARIABLE_REGEX = r'^[^[;\|]+$'
+ 
+ 
+@@ -192,7 +192,7 @@ class CustomDestinationSchema(BaseDestinationSchema):
+ 
+ class ExtensionDestinationSchema(BaseDestinationSchema):
+     exten = fields.String(
+-        validate=Regexp(CONTEXT_REGEX), attribute='actionarg1', required=True
++        validate=Regexp(EXTEN_REGEX), attribute='actionarg1', required=True
+     )
+     context = fields.String(
+         validate=Regexp(CONTEXT_REGEX), attribute='actionarg2', required=True
